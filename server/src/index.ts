@@ -10,7 +10,7 @@ import { z } from "zod";
 // =======================
 import { parse } from "csv-parse/sync";
 import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
+import customParseFormat from "dayjs/plugin/customParseFormat.js";
 import { nanoid } from "nanoid";
 
 dayjs.extend(customParseFormat);
