@@ -1,0 +1,11 @@
+{
+  "name": "spendscope",
+  "private": true,
+  "workspaces": ["web", "server"],
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "scripts": {
+    "dev": "concurrently -n api,web -c auto \"npm run dev -w server\" \"npm run dev -w web\""
+  }
+}
