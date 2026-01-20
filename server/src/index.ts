@@ -1,10 +1,12 @@
 import express from "express";
 import cors from "cors";
-import helmet from "helmet";
+import helmetImport from "helmet";
 import compression from "compression";
 import multer from "multer";
 import { z } from "zod";
 import { analyzeCsvText, type AnalysisResponse } from "./analyze.js";
+
+const helmet = (helmetImport as any).default ?? helmetImport;
 
 const app = express();
 
