@@ -4,7 +4,7 @@ import helmetImport from "helmet";
 import compression from "compression";
 import multer from "multer";
 import { z } from "zod";
-import { analyzeCsvText, type AnalysisResponse } from "./analyze.js";
+import { analyzeCsvText, type AnalysisResponse } from "./analyze"; // ✅ FIX: no .js
 
 const helmet = (helmetImport as any).default ?? helmetImport;
 
@@ -23,6 +23,11 @@ app.use(
     credentials: true
   })
 );
+
+// ✅ Add root route (helps testing)
+app.get("/", (_req, res) => {
+  res.status(200).json({ ok: true, service: "SpendScope API" });
+});
 
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -75,14 +80,11 @@ app.get("/api/demo", (_req, res) => {
   }
 });
 
-/**
- * Local dev: listen on a port.
- * Vercel: export default app.
- */
+// Local dev: listen on a port.
+// Vercel: export default app.
 const isVercel = !!process.env.VERCEL;
 if (!isVercel) {
   app.listen(PORT, () => {
-    // eslint-disable-next-line no-console
     console.log(`SpendScope API running on http://localhost:${PORT}`);
   });
 }
